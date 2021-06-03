@@ -41,14 +41,15 @@ login = WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.CSS_SELEC
 not_now = WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH, "//button[contains(text(), 'Not Now')]"))).click()
 not_now_two = WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH, "//button[contains(text(), 'Not Now')]"))).click()
 
+time.sleep(1)
+
 # Target the searchbox and input the keyword to be search
 search_box = WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH, "//input[@placeholder='Search']")))
 search_box.clear()
 keyword = "#cats"
 search_box.send_keys(keyword)
 
-# Sleep before doing enter key
-time.sleep(2)
+time.sleep(4)
 
 # Hit enter key in the search box
 search_box.send_keys(Keys.ENTER)
@@ -56,10 +57,11 @@ search_box.send_keys(Keys.ENTER)
 time.sleep(1)
 search_box.send_keys(Keys.ENTER)
 
-time.sleep(2)
+# Sleep to make sure search result is done rendering
+time.sleep(4)
 
+# Window scroll page to bottom
 driver.execute_script("window.scrollTo(0,4000);")
-
 images = driver.find_elements_by_tag_name('img')
 images = [image.get_attribute('src') for image in images]
 
