@@ -65,4 +65,16 @@ driver.execute_script("window.scrollTo(0,4000);")
 images = driver.find_elements_by_tag_name('img')
 images = [image.get_attribute('src') for image in images]
 
-print(images)
+# Create path for saving the images in local server
+path = os.getcwd()
+path = os.path.join(path, keyword[1:] + "s")
+os.mkdir(path)
+
+# Download the images
+counter = 0
+for image in images:
+    save_as = os.path.join(path, keyword[1:] + str(counter) + '.jpg')
+    wget.download(image, save_as)
+    counter += 1
+
+print("success")
